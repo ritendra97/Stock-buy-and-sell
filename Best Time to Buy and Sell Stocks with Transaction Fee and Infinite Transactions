@@ -1,0 +1,39 @@
+
+public class Main4 {
+
+    public static void main(String [] args){
+        int price[] = { 10,15,17,20,16,18,22,20,22,20,23,25 };
+        int n = price.length;
+        int fee = 3;
+        System.out.print(maxProfit(price,fee));
+    }
+
+    private static int maxProfit(int[] price, int fee) {
+
+        int old_buying_price = -price[0];
+        int old_selling_price = 0;
+
+        for(int i = 1;i<price.length;i++){
+            int new_buying_price  = 0;
+            int new_selling_price = 0;
+
+            if(old_selling_price-price[i]>old_buying_price){
+                new_buying_price = old_selling_price-price[i];
+            }else{
+                new_buying_price = old_buying_price;
+            }
+
+
+            if(old_buying_price+price[i]-fee>old_selling_price){
+                new_selling_price = old_buying_price+price[i]-fee;
+            }else {
+                new_selling_price = old_selling_price;
+            }
+
+            old_buying_price = new_buying_price;
+            old_selling_price = new_selling_price;
+        }
+
+        return old_selling_price;
+    }
+}
